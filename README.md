@@ -1,5 +1,7 @@
 # python3-multiprocessing-template
-This is just an empty python3 multiprocessing template. It is my main framework for multi-threaded applications. 
+This is just an empty python3 multiprocessing, argparse and python version testing template. It is my main framework for multi-threaded applications. 
+
+This framework is very basic and is setup to read in a file and do work on each line.
 
 CTRL-C works great in Linux, not exactly sure what is going on with windows (any help here would be appreciated) but if you need to break the program in windows, use CTRL-Break.
 
