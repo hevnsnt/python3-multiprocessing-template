@@ -3,13 +3,10 @@ import argparse
 from time import sleep
 
 def readfile(file):
-  with open(file, 'r') as f:
-    for line in f:
-      try:
-        readline = line.strip('\n')
-        work(line)
-      except:
-        pass
+  with open(file, 'r') as file:
+    data = file.readlines()
+    file.close()
+  return data
 
 def work(line):
         print(f"going to do some work on {line}")
@@ -43,9 +40,9 @@ if __name__ == '__main__':
   parser.add_argument("-v", "--verbose", help="increase output verbosity",
                        action="store_true")
   threads, verbose, filename = parseArgs(parser.parse_args())
+  data = readfile(filename)
   
   pool = Pool(threads) # Number of threads going to use
-  pool.map(work)
-  readfile(filename)
+  pool.map(work,data)
   pool.close()
   pool.join()
