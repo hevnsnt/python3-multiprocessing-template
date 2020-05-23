@@ -4,19 +4,19 @@ from time import sleep
 
 def readfile(file):
   with open(file, 'r') as f:
-    for x in f:
+    for line in f:
       try:
-        link = x.strip('\n')
-        key = link.split('/')[3]
-        urls.append(link)
+        readline = line.strip('\n')
+        work(line)
       except:
         pass
 
-def work(link):
-        print(f"going to dump {link}")
+def work(line):
+        print(f"going to du some work on {line}")
         countdown(2)
 
 def countdown(time=30):
+  #defaults to 30secs unless you pass it a different value
   for remaining in range(time, 0, -1):
     print(f"\r<<<<  {remaining} seconds remain before auto-resume >>>>", end=" ", flush=True)
     sleep(1)
