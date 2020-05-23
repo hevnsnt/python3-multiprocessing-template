@@ -1,4 +1,5 @@
 from multiprocessing import Pool, cpu_count
+from multiprocessing.dummy import Pool as ThreadPool
 import argparse
 from time import sleep
 
@@ -40,9 +41,12 @@ if __name__ == '__main__':
   parser.add_argument("-v", "--verbose", help="increase output verbosity",
                        action="store_true")
   threads, verbose, filename = parseArgs(parser.parse_args())
+
+  #read the entire file and store it in a variable:
   data = readfile(filename)
   
-  pool = Pool(threads) # Number of threads going to use
+  #Init the data pool
+  pool = ThreadPool(threads) # Number of threads going to use
   pool.map(work,data)
   pool.close()
   pool.join()
