@@ -1,5 +1,7 @@
 # python3-multiprocessing-template
-This is just an empty python3 multiprocessing template. I use it for things
+This is just an empty python3 multiprocessing template. It is my main framework for multi-threaded applications. 
+
+CTRL-C works great in Linux, not exactly sure what is going on with windows (any help here would be appreciated) but if you need to break the program in windows, use CTRL-Break.
 
 
 Map is a cool little function, and the key to easily injecting parallelism into your Python code. For those unfamiliar, map is something lifted from functional languages like Lisp. It is a function which maps another function over a sequence. e.g.
@@ -12,6 +14,6 @@ In the general case, if you’re using the multiprocessing pool for CPU bound ta
 
 
 
-Sources:
+##Sources:
 https://www.ellicium.com/python-multiprocessing-pool-process/
 https://chriskiehl.com/article/parallelism-in-one-line
