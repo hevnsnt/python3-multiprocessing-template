@@ -16,4 +16,5 @@ In the general case, if you’re using the multiprocessing pool for CPU bound ta
 
 ## Sources:
 https://www.ellicium.com/python-multiprocessing-pool-process/
+
 https://chriskiehl.com/article/parallelism-in-one-line
