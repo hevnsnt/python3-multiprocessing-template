@@ -1,5 +1,5 @@
 from multiprocessing import Pool
-import sys
+import argparse
 from time import sleep
 
 def readfile(file):
@@ -23,9 +23,16 @@ def countdown(time=30):
 
 
 if __name__ == '__main__':
-  urls = []
-  readfile(sys.argv[1])
-  pool = Pool(4)
+  parser = argparse.ArgumentParser()
+  parser.add_argument("-f", "--file", help="Insert the flie you plan on parsing")
+  parser.add_argument("-t", "--threads", help="Number of threads, by default will use all available processors")
+  parser.add_argument("-v", "--verbose", help="increase output verbosity",
+                       action="store_true")
+  parser.parse_args()
+  if args.verbose:
+    print("verbosity turned on")
+  
+  pool = Pool(4) # Number of threads going to use
   pool.map(work, urls)
   pool.close()
   pool.join()
