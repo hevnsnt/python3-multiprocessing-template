@@ -1,24 +1,27 @@
-from multiprocessing import Pool, cpu_count
+from multiprocessing import cpu_count
 from multiprocessing.dummy import Pool as ThreadPool
 import argparse
 from time import sleep
+import signal
+import sys
+
 
 def readfile(file):
   with open(file, 'r') as file:
     data = file.readlines()
-    file.close()
   return data
 
 def work(line):
-        print(f"going to do some work on {line}")
-        countdown(2)
+  while(True):
+    try:
+      print(f"\rgoing to do some work on {line}")
+      countdown(5)
+    except (KeyboardInterrupt, SystemExit):
+      print("Exiting work...")
+      break
 
 def countdown(time=30):
-  #defaults to 30secs unless you pass it a different value
-  sleep(3)
-  '''for remaining in range(time, 0, -1):
-    print(f"\r<<<<  {remaining} seconds remain before auto-resume >>>>", end=" ", flush=True)
-    sleep(1)'''
+  sleep(time)
 
 def parseArgs(args):
   if args.verbose:
@@ -41,12 +44,15 @@ if __name__ == '__main__':
   parser.add_argument("-v", "--verbose", help="increase output verbosity",
                        action="store_true")
   threads, verbose, filename = parseArgs(parser.parse_args())
-
   #read the entire file and store it in a variable:
   data = readfile(filename)
-  
   #Init the data pool
   pool = ThreadPool(threads) # Number of threads going to use
-  pool.map(work,data)
-  pool.close()
-  pool.join()
+  try:
+    pool.map(work,data) # This launches the workers at the function to do work
+    pool.close()
+    pool.join()
+  except KeyboardInterrupt:
+    print("Exiting Cleanly...")
+  except Exception as error:
+    print(error)
