@@ -19,13 +19,12 @@ def readfile(file):
   return data
 
 def work(line):
-  while(True):
-    try:
-      print(f"\rgoing to do some work on {line}")
-      countdown(5)
-    except (KeyboardInterrupt, SystemExit):
-      print("Exiting work...")
-      break
+  try:
+    print(f"\rgoing to do some work on {line}")
+    countdown(5)
+  except (KeyboardInterrupt, SystemExit):
+    print("Exiting work...")
+    break
 
 def countdown(time=30):
   sleep(time)
@@ -35,7 +34,7 @@ def cmdline_args():
   p = argparse.ArgumentParser(description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
   p.add_argument("-f", "--file", required = True, help="Insert the flie you plan on parsing")
-  p.add_argument("-t", "--threads", default=cpu_count(), help="Number of threads, by default will use all available processors")
+  p.add_argument("-t", "--threads", default=cpu_count(), type=int, help="Number of threads, by default will use all available processors")
   p.add_argument("-v", "--verbose", help="increase output verbosity",
                        action="store_true")
   return(p.parse_args())
